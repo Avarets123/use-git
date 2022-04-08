@@ -122,3 +122,47 @@ interface water {
     price: number
 }
 
+
+
+const a: 'ew' | 'we' = 'ew';
+
+
+type state = 'left' | 'right';
+
+function moveDog(state: state) {
+    switch (state) {
+        case 'left': {
+            return -1;
+        }
+        case 'right': {
+            return 1;
+        }
+        default: {
+            return 0;
+        }
+    }
+}
+
+
+interface IConfig {
+    port: number;
+    host: string
+}
+
+function connect(config: IConfig | 'default') {
+
+}
+
+connect('default');
+
+
+const configConnect = {
+    host: 'localhost',
+    protocol: 'https' as 'https'
+}
+
+function useConnect(host: string, protocol: 'https' | 'https') {
+
+}
+
+useConnect(configConnect.host, configConnect.protocol);
