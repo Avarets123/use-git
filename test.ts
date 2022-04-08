@@ -141,28 +141,55 @@ function moveDog(state: state) {
             return 0;
         }
     }
+} interface IConfig { port: number; host: string
 }
-
-
-interface IConfig {
-    port: number;
-    host: string
-}
-
 function connect(config: IConfig | 'default') {
 
 }
-
 connect('default');
-
-
-const configConnect = {
+const configConnect  = {
     host: 'localhost',
     protocol: 'https' as 'https'
-}
+};
+
 
 function useConnect(host: string, protocol: 'https' | 'https') {
+}
+useConnect(configConnect.host, configConnect.protocol);
 
+
+
+function log<T>(name: T): T {
+    return name;
 }
 
-useConnect(configConnect.host, configConnect.protocol);
+
+log<number>(433);
+log<string>('sdaf');
+log<boolean>(false);
+
+
+function dobleLog<F, S>(f: F, s: S): S {
+    return s;
+}
+
+dobleLog<object[], boolean>([{name: 'ddddd'}], false);
+
+
+
+interface addMethods {
+    length: number;
+}
+
+function ffff<T extends addMethods, K>(first: T, second: K) {
+    return second;
+}
+
+
+interface IUser {
+    name: string;
+    age: number;
+    greet<T>(value: T):boolean 
+}
+
+
