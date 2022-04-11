@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction} from 'express';
-import userRouter from './users/users';
 
 const port = 8000;
 const app = express();
@@ -13,7 +12,6 @@ app.get('/hello', (req, res) => {
     throw new Error(`Error!!!`);
 })
 
-app.use('/users', userRouter);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.log(err.message);

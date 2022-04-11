@@ -1,7 +1,11 @@
-import express from 'express';
-import userRouter from './users/users';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
 const port = 8000;
-const app = express();
+const app = (0, express_1.default)();
 app.use((req, res, next) => {
     console.log(`Время ${Date.now()}`);
     next();
@@ -9,7 +13,6 @@ app.use((req, res, next) => {
 app.get('/hello', (req, res) => {
     throw new Error(`Error!!!`);
 });
-app.use('/users', userRouter);
 app.use((err, req, res, next) => {
     console.log(err.message);
     res.status(401).send(err.message);
@@ -17,3 +20,4 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`Сервер запущен на http://localhost:${port}`);
 });
+console.log();
