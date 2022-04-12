@@ -1,24 +1,28 @@
-import { BaseController } from "../comon/base.controller";
-import { LoggerService } from "../logger/logger.service";
-import { Request, Response, NextFunction} from 'express';
-import { HTTPError } from "../errors/http-error-class";
+import { BaseController } from '../comon/base.controller';
+import { Request, Response, NextFunction } from 'express';
+import { HTTPError } from '../errors/http-error-class';
+import { inject, injectable } from 'inversify';
+import { TYPES } from '../types';
+import { ILogger } from '../logger/logger.interface';
+import 'reflect-metadata';
+import { IUserController } from './users.controller.interface';
 
- 
-export class UserController extends BaseController {
-    constructor(logger: LoggerService) {
-        super(logger);
-        this.bindRoutes([
-            { path: '/register', method: 'post', func: this.regiter },
-            { path: '/login', method: 'post', func: this.login }
-        ]);
-    }
+@injectable()
+export class UserController extends BaseController implements IUserController {
+	constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
+		super(loggerService);
 
-    login(req: Request, res: Response, next: NextFunction) {
-        next(new HTTPError(401, 'Ошибка авторизации'));
-    }
+		this.bindRoutes([
+			{ path: '/register', method: 'post', func: this.register },
+			{ path: '/login', method: 'post', func: this.login },
+		]);
+	}
 
-    regiter(req: Request, res: Response, next: NextFunction) {
+	login(req: Request, res: Response, next: NextFunction): void {
+		next(new HTTPError(401, 'Ошибка авторизации'));
+	}
 
-        this.ok( res, 'register');
-    }
+	register(req: Request, res: Response, next: NextFunction): void {
+		this.ok(res, 'register');
+	}
 }

@@ -30,12 +30,31 @@ function Method(target, propertyKey, propertyDescriptor) {
         return args[0] * 10;
     };
 }
+function Prop(target, propertyKey) {
+    let value;
+    const setter = (newValue) => {
+        console.log('Setter');
+        return newValue;
+    };
+    const getter = () => {
+        console.log('getter');
+        return value;
+    };
+    Object.defineProperty(target, propertyKey, {
+        get: getter,
+        set: setter
+    });
+}
 let User = class User {
     update(newId) {
         this.id = newId;
         return this.id;
     }
 };
+__decorate([
+    Prop,
+    __metadata("design:type", Number)
+], User.prototype, "id", void 0);
 __decorate([
     Method,
     __metadata("design:type", Function),
